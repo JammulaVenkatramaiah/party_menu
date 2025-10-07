@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" th:href="@{/}">
+                <i class="fas fa-utensils me-2"></i>Party Menu
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" 
+                           data-bs-toggle="dropdown">
+                            <i class="fas fa-utensils me-1"></i>Menu
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/menu}">All Menus</a></li>
+                            <li><a class="dropdown-item" th:href="@{/menu/popular}">Popular Items</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li th:each="menuType : ${menuTypes}">
+                                <a class="dropdown-item" 
+                                   th:href="@{'/menu/' + ${menuType.id}}"
+                                   th:text="${menuType.name}">Menu Type</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/about}">
+                            <i class="fas fa-info-circle me-1"></i>About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">
+                            <i class="fas fa-envelope me-1"></i>Contact
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Search Form -->
+                <form class="d-flex me-3" th:action="@{/menu/search}" method="get">
+                    <div class="input-group">
+                        <input class="form-control form-control-sm" type="search" 
+                               name="keyword" placeholder="Search menu..." 
+                               th:value="${keyword}">
+                        <button class="btn btn-outline-secondary btn-sm" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Cart Icon -->
+                <div class="navbar-nav">
+                    <a class="nav-link position-relative" th:href="@{/cart}" id="cartIcon">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count" 
+                              id="cartCount" style="display: none;">
+                            0
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        // Function to update cart count
+        function updateCartCount() {
+            fetch('/cart/count')
+                .then(response => response.json())
+                .then(count => {
+                    const cartCountElement = document.getElementById('cartCount');
+                    if (count > 0) {
+                        cartCountElement.textContent = count;
+                        cartCountElement.style.display = 'inline';
+                    } else {
+                        cartCountElement.style.display = 'none';
+                    }
+                })
+                .catch(error => console.error('Error fetching cart count:', error));
+        }
+
+        // Update cart count on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+        });
+
+        // Update cart count periodically
+        setInterval(updateCartCount, 30000); // Every 30 seconds
+    </script>
+</body>
+</html>

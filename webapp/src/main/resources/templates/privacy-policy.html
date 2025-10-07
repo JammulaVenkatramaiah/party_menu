@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: layout(~{::main}, ~{::title})}">
+<head>
+    <title>Privacy Policy - Party Menu</title>
+</head>
+<body>
+    <main>
+        <div class="container mt-4 mb-5">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <nav aria-label="breadcrumb" class="mb-4">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                            <li class="breadcrumb-item active">Privacy Policy</li>
+                        </ol>
+                    </nav>
+
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h1 class="h3 mb-0">Privacy Policy</h1>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted mb-4">Last updated: <strong>October 2025</strong></p>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-success">Information We Collect</h2>
+                                <p>We collect information you provide directly to us, such as:</p>
+                                <ul>
+                                    <li>Name and contact information when placing orders</li>
+                                    <li>Event details and catering preferences</li>
+                                    <li>Payment information for processing orders</li>
+                                    <li>Feedback and communications with our team</li>
+                                </ul>
+                            </section>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-success">How We Use Your Information</h2>
+                                <p>We use the information we collect to:</p>
+                                <ul>
+                                    <li>Process and fulfill your catering orders</li>
+                                    <li>Communicate with you about your orders and services</li>
+                                    <li>Improve our services and customer experience</li>
+                                    <li>Send promotional materials (with your consent)</li>
+                                </ul>
+                            </section>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-success">Information Sharing</h2>
+                                <p>
+                                    We do not sell, trade, or otherwise transfer your personal information to third parties except as described in this policy. We may share information with trusted service providers who assist us in operating our business.
+                                </p>
+                            </section>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-success">Data Security</h2>
+                                <p>
+                                    We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
+                                </p>
+                            </section>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-success">Your Rights</h2>
+                                <p>You have the right to:</p>
+                                <ul>
+                                    <li>Access and update your personal information</li>
+                                    <li>Request deletion of your personal information</li>
+                                    <li>Opt out of promotional communications</li>
+                                    <li>Request information about how your data is used</li>
+                                </ul>
+                            </section>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-success">Contact Us</h2>
+                                <p>If you have questions about this Privacy Policy, please contact us:</p>
+                                <address>
+                                    <strong>Party Menu</strong><br>
+                                    Email: privacy@partymenu.com<br>
+                                    Phone: +91 98765 43210<br>
+                                    Address: Hyderabad, Telangana, India
+                                </address>
+                            </section>
+
+                            <div class="text-center mt-5">
+                                <a th:href="@{/}" class="btn btn-success">
+                                    <i class="fas fa-home me-2"></i>Back to Home
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

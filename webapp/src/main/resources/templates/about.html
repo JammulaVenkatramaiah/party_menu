@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Party Menu</title>
+    <link href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="/css/party-theme.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="/">
+                <i class="fas fa-utensils me-2"></i>Party Menu
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/menu">
+                            <i class="fas fa-utensils me-1"></i>Menu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about">
+                            <i class="fas fa-info-circle me-1"></i>About
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Cart Icon -->
+                <div class="navbar-nav">
+                    <a class="nav-link position-relative" href="/cart" id="cartIcon">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count" 
+                              id="cartCount" style="display: none;">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container" style="margin-top: 100px;">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Page Header -->
+                <div class="text-center mb-5">
+                    <h1 class="display-4 fw-bold text-primary">About Party Menu</h1>
+                    <p class="lead text-muted">
+                        Creating memorable dining experiences for your special occasions
+                    </p>
+                </div>
+
+                <!-- About Content -->
+                <div class="row mb-5">
+                    <div class="col-lg-6 mb-4">
+                        <div class="about-image">
+                            <img src="https://via.placeholder.com/500x400/e9ecef/6c757d?text=Party+Catering" 
+                                 alt="Party Menu Catering" class="img-fluid rounded shadow">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-content">
+                            <h2 class="mb-4">Our Story</h2>
+                            <p class="mb-4">
+                                Welcome to Party Menu, your premier destination for exceptional party catering services. 
+                                Since our establishment, we have been dedicated to creating unforgettable culinary experiences 
+                                for celebrations of all sizes.
+                            </p>
+                            <p class="mb-4">
+                                Our passion lies in bringing people together through delicious food, whether it's an intimate 
+                                gathering or a grand celebration. We understand that every event is unique, and our diverse 
+                                menu options are designed to cater to various tastes and dietary preferences.
+                            </p>
+                            <p>
+                                From corporate events to birthday parties, weddings to casual get-togethers, we provide 
+                                fresh, high-quality dishes that will leave your guests talking about your event long after 
+                                it's over.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Section -->
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <h2 class="text-center mb-5">Why Choose Party Menu?</h2>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="feature-card text-center">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-star fa-3x text-primary"></i>
+                            </div>
+                            <h4>Premium Quality</h4>
+                            <p class="text-muted">
+                                We use only the finest, freshest ingredients to ensure every dish meets 
+                                our high standards of quality and taste.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="feature-card text-center">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-users fa-3x text-primary"></i>
+                            </div>
+                            <h4>Expert Team</h4>
+                            <p class="text-muted">
+                                Our experienced chefs and catering professionals are dedicated to making 
+                                your event a memorable culinary experience.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="feature-card text-center">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-heart fa-3x text-primary"></i>
+                            </div>
+                            <h4>Personalized Service</h4>
+                            <p class="text-muted">
+                                We work closely with you to customize menus and services that perfectly 
+                                match your event's theme and requirements.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Section -->
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <h2 class="text-center mb-5">Our Services</h2>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="service-item">
+                            <h5><i class="fas fa-birthday-cake me-2 text-primary"></i>Birthday Parties</h5>
+                            <p class="text-muted">
+                                Make birthdays extra special with our festive menu options and themed catering packages.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="service-item">
+                            <h5><i class="fas fa-briefcase me-2 text-primary"></i>Corporate Events</h5>
+                            <p class="text-muted">
+                                Professional catering services for meetings, conferences, and corporate celebrations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="service-item">
+                            <h5><i class="fas fa-ring me-2 text-primary"></i>Weddings</h5>
+                            <p class="text-muted">
+                                Elegant wedding catering with customizable menus to make your special day perfect.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="service-item">
+                            <h5><i class="fas fa-glass-cheers me-2 text-primary"></i>Social Gatherings</h5>
+                            <p class="text-muted">
+                                Casual and formal catering options for all types of social events and celebrations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="contact-section text-center bg-light p-5 rounded">
+                            <h2 class="mb-4">Ready to Plan Your Event?</h2>
+                            <p class="lead mb-4">
+                                Let us help you create an unforgettable culinary experience for your next celebration.
+                            </p>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <i class="fas fa-phone fa-2x text-primary mb-2"></i>
+                                    <h6>Call Us</h6>
+                                    <p class="text-muted">+1 (555) 123-4567</p>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                                    <h6>Email Us</h6>
+                                    <p class="text-muted">info@partymenu.com</p>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <i class="fas fa-map-marker-alt fa-2x text-primary mb-2"></i>
+                                    <h6>Visit Us</h6>
+                                    <p class="text-muted">123 Catering St, Food City</p>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <a href="/menu" class="btn btn-primary btn-lg me-3">
+                                    <i class="fas fa-utensils me-2"></i>View Our Menu
+                                </a>
+                                <a href="/" class="btn btn-outline-primary btn-lg">
+                                    <i class="fas fa-home me-2"></i>Back to Home
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/webjars/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .feature-card, .service-item {
+            padding: 1rem;
+        }
+
+        .feature-icon {
+            opacity: 0.8;
+        }
+
+        .about-image img {
+            max-height: 400px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .contact-section {
+            background-color: #f8f9fa !important;
+        }
+
+        .cart-count {
+            font-size: 0.75rem;
+        }
+    </style>
+</body>
+</html>

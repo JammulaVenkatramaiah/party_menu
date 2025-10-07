@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: layout(~{::main}, ~{::title})}">
+<head>
+    <title>Terms of Service - Party Menu</title>
+</head>
+<body>
+    <main>
+        <div class="container mt-4 mb-5">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <nav aria-label="breadcrumb" class="mb-4">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                            <li class="breadcrumb-item active">Terms of Service</li>
+                        </ol>
+                    </nav>
+
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h1 class="h3 mb-0">Terms of Service</h1>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted mb-4">Last updated: <strong>October 2025</strong></p>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-primary">1. Acceptance of Terms</h2>
+                                <p>
+                                    By accessing and using Party Menu's catering services and website, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                                </p>
+                            </section>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-primary">2. Service Description</h2>
+                                <p>
+                                    Party Menu provides catering services for various events including parties, corporate meetings, and special occasions. Our services include menu planning, food preparation, delivery, and setup services as specified in individual service agreements.
+                                </p>
+                            </section>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-primary">3. Ordering and Payment</h2>
+                                <ul>
+                                    <li>Orders must be placed at least 24 hours in advance</li>
+                                    <li>A deposit may be required for large orders</li>
+                                    <li>Payment terms will be specified in the service agreement</li>
+                                    <li>Prices are subject to change without notice</li>
+                                </ul>
+                            </section>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-primary">4. Cancellation Policy</h2>
+                                <p>
+                                    Cancellations made more than 24 hours before the event will receive a full refund minus any processing fees. Cancellations made within 24 hours of the event may be subject to cancellation fees.
+                                </p>
+                            </section>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-primary">5. Food Safety and Allergies</h2>
+                                <p>
+                                    While we take precautions to prevent cross-contamination, our kitchen handles various allergens including nuts, dairy, gluten, and seafood. Customers with severe allergies should inform us at the time of ordering.
+                                </p>
+                            </section>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-primary">6. Limitation of Liability</h2>
+                                <p>
+                                    Party Menu's liability is limited to the cost of the catering service provided. We are not responsible for any indirect, consequential, or incidental damages arising from our services.
+                                </p>
+                            </section>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-primary">7. Privacy Policy</h2>
+                                <p>
+                                    We respect your privacy and are committed to protecting your personal information. Customer information will not be shared with third parties except as necessary to provide our services.
+                                </p>
+                            </section>
+
+                            <section class="mb-4">
+                                <h2 class="h4 text-primary">8. Contact Information</h2>
+                                <p>
+                                    For questions about these Terms of Service, please contact us at:
+                                </p>
+                                <address>
+                                    <strong>Party Menu</strong><br>
+                                    Email: info@partymenu.com<br>
+                                    Phone: +91 98765 43210<br>
+                                    Address: Hyderabad, Telangana, India
+                                </address>
+                            </section>
+
+                            <div class="text-center mt-5">
+                                <a th:href="@{/}" class="btn btn-primary">
+                                    <i class="fas fa-home me-2"></i>Back to Home
+                                </a>
+                                <a th:href="@{/menu}" class="btn btn-outline-primary">
+                                    <i class="fas fa-utensils me-2"></i>Browse Menu
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

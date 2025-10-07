@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: layout(~{::main}, ~{::title})}">
+<head>
+    <title>Frequently Asked Questions - Party Menu</title>
+</head>
+<body>
+    <main>
+        <div class="container mt-4 mb-5">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <nav aria-label="breadcrumb" class="mb-4">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                            <li class="breadcrumb-item active">FAQ</li>
+                        </ol>
+                    </nav>
+
+                    <div class="text-center mb-5">
+                        <h1 class="display-5 fw-bold text-primary">Frequently Asked Questions</h1>
+                        <p class="lead text-muted">Find answers to common questions about our catering services</p>
+                    </div>
+
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    How far in advance should I place my order?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We recommend placing orders at least 24-48 hours in advance to ensure availability and proper preparation. For large events or special occasions, we suggest placing orders 1-2 weeks ahead.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Do you accommodate dietary restrictions?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes! We can accommodate various dietary restrictions including vegetarian, vegan, gluten-free, and allergen-free options. Please inform us of any special requirements when placing your order.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    What is your delivery area?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We currently deliver within Hyderabad and surrounding areas. Delivery charges may apply based on distance. Please contact us to confirm if we deliver to your location.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    What is your cancellation policy?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Orders can be cancelled free of charge up to 24 hours before the scheduled delivery/event time. Cancellations within 24 hours may incur a cancellation fee depending on the order size and preparation stage.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    Do you provide serving utensils and setup?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, we provide basic serving utensils, plates, and napkins with our catering packages. Full setup and serving staff can be arranged for an additional fee for larger events.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                                    What payment methods do you accept?
+                                </button>
+                            </h2>
+                            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We accept cash, credit/debit cards, and digital payments (UPI, Paytm, etc.). For large orders, we may require a deposit at the time of booking with the balance due upon delivery.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7">
+                                    Can I customize menu items?
+                                </button>
+                            </h2>
+                            <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Absolutely! We can customize menu items to suit your preferences and event theme. Our chefs are happy to work with you to create a personalized menu that meets your specific needs.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h5 class="card-title">Still have questions?</h5>
+                                <p class="card-text">Can't find what you're looking for? Contact our team directly.</p>
+                                <div class="d-flex gap-2 justify-content-center">
+                                    <a href="tel:+919876543210" class="btn btn-primary">
+                                        <i class="fas fa-phone me-2"></i>Call Us
+                                    </a>
+                                    <a href="mailto:info@partymenu.com" class="btn btn-outline-primary">
+                                        <i class="fas fa-envelope me-2"></i>Email Us
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
