@@ -49,7 +49,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("user") User user,
+    public String registerUser(@ModelAttribute User user,
                                BindingResult bindingResult,
                                Model model,
                                RedirectAttributes redirectAttributes) {
@@ -59,7 +59,7 @@ public class AuthController {
         }
 
         try {
-            userService.registerUser(user.getName(), user.getPhone(), user.getUsername(), user.getEmail(), user.getPassword());
+            userService.registerUser(user.getName(), user.getPhone(), user.getEmail(), user.getPassword());
             redirectAttributes.addFlashAttribute("successMessage", "Registration successful! Please log in.");
             return "redirect:/auth/login";
         } catch (RuntimeException e) {

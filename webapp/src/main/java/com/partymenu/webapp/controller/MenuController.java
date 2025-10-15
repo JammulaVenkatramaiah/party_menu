@@ -6,13 +6,12 @@ import com.partymenu.webapp.entity.MenuType;
 import com.partymenu.webapp.service.CategoryService;
 import com.partymenu.webapp.service.MenuItemService;
 import com.partymenu.webapp.service.MenuTypeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +24,6 @@ public class MenuController {
     private final CategoryService categoryService;
     private final MenuItemService menuItemService;
     
-    @Autowired
     public MenuController(MenuTypeService menuTypeService, CategoryService categoryService, MenuItemService menuItemService) {
         this.menuTypeService = menuTypeService;
         this.categoryService = categoryService;
@@ -89,7 +87,7 @@ public class MenuController {
     }
     
     @GetMapping("/search")
-    public String searchMenu(@Param("keyword") String keyword, Model model) {
+    public String searchMenu(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
         List<MenuItem> searchResults;
         
         if (keyword != null && !keyword.trim().isEmpty()) {

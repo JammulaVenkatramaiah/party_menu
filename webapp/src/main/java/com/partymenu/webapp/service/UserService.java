@@ -21,10 +21,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User registerUser(String name, String phone, String username, String email, String password) {
-        if (userRepository.existsByUsername(username)) {
-            throw new RuntimeException("Username already exists");
-        }
+    public User registerUser(String name, String phone, String email, String password) {
         if (userRepository.existsByEmail(email)) {
             throw new RuntimeException("Email already exists");
         }
@@ -32,16 +29,11 @@ public class UserService {
         User user = new User();
         user.setName(name);
         user.setPhone(phone);
-        user.setUsername(username);
         user.setEmail(email);
         user.setPassword(password); // Store plain text password as requested
         user.setEnabled(true);
 
         return userRepository.save(user);
-    }
-
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
     }
 
     public Optional<User> findByEmail(String email) {
@@ -50,10 +42,6 @@ public class UserService {
 
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
-    }
-
-    public boolean existsByUsername(String username) {
-        return userRepository.existsByUsername(username);
     }
 
     public boolean existsByEmail(String email) {

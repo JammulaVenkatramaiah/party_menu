@@ -164,7 +164,7 @@ public class MenuItem {
     
     // Utility methods
     public String getFormattedPrice() {
-        return String.format("$%.2f", price);
+        return "$%.2f".formatted(price);
     }
     
     public String getPreparationTimeText() {

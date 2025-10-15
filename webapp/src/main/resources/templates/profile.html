@@ -106,7 +106,7 @@
                             <div class="profile-avatar">
                                 <i class="fas fa-user"></i>
                             </div>
-                            <h2 th:text="${user.username}">Username</h2>
+                            <h2 th:text="${user.email}">Email</h2>
                             <p>Member since <span th:text="${#temporals.format(user.createdAt, 'MMMM yyyy')}">January 2024</span></p>
                         </div>
                         <div class="profile-body">
@@ -120,10 +120,6 @@
                                 <div class="info-item">
                                     <span class="info-label">Phone:</span>
                                     <span class="info-value" th:text="${user.phone}">+1234567890</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Username:</span>
-                                    <span class="info-value" th:text="${user.username}">username</span>
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label">Email:</span>
