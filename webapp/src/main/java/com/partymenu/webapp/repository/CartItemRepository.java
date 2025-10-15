@@ -31,4 +31,24 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     @Modifying
     @Query("DELETE FROM CartItem ci WHERE ci.createdAt < :cutoffDate")
     void deleteOldCartItems(@Param("cutoffDate") java.time.LocalDateTime cutoffDate);
+
+    // User-based queries
+    List<CartItem> findByUserIdOrderByCreatedAtDesc(Long userId);
+
+    Optional<CartItem> findByUserIdAndMenuItemId(Long userId, Long menuItemId);
+
+    @Query("SELECT SUM(ci.quantity) FROM CartItem ci WHERE ci.userId = :userId")
+    Integer getTotalItemsByUser(@Param("userId") Long userId);
+
+    @Query("SELECT SUM(ci.totalPrice) FROM CartItem ci WHERE ci.userId = :userId")
+    java.math.BigDecimal getTotalAmountByUser(@Param("userId") Long userId);
+
+    @Modifying
+    @Query("DELETE FROM CartItem ci WHERE ci.userId = :userId")
+    void deleteByUserId(@Param("userId") Long userId);
+
+    // Migrate session cart to user cart
+    @Modifying
+    @Query("UPDATE CartItem ci SET ci.userId = :userId, ci.sessionId = '' WHERE ci.sessionId = :sessionId")
+    void migrateSessionCartToUser(@Param("sessionId") String sessionId, @Param("userId") Long userId);
 }

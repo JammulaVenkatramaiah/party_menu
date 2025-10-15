@@ -3,6 +3,7 @@ package com.partymenu.webapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class HomeController {
     private final MenuItemService menuItemService;
     private final UserService userService;
 
+    @Autowired
     public HomeController(MenuTypeService menuTypeService, MenuItemService menuItemService, UserService userService) {
         this.menuTypeService = menuTypeService;
         this.menuItemService = menuItemService;

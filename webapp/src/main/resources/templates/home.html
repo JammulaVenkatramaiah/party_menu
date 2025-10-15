@@ -130,5 +130,21 @@
             </a>
         </div>
     </div>
+
+
+
+    <script>
+        function showRegisterForm() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+            document.getElementById('authModalLabel').textContent = 'Register';
+        }
+
+        function showLoginForm() {
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('authModalLabel').textContent = 'Login';
+        }
+    </script>
 </div>
 </html>

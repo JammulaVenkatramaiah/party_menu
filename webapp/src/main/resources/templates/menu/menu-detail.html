@@ -144,9 +144,10 @@
                                     <div class="mt-auto">
                                         <div th:if="${menuItem.isAvailable == null or menuItem.isAvailable}" class="d-flex gap-2">
                                             <!-- Add to Cart Form -->
-                                            <form class="flex-grow-1 add-to-cart-form" 
-                                                  action="/cart/add" method="post">
+                                            <form class="flex-grow-1 add-to-cart-form"
+                                                  th:action="@{/cart/add}" method="post">
                                                 <input type="hidden" name="menuItemId" th:value="${menuItem.id}">
+                                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                                                 <div class="input-group">
                                                     <select name="quantity" class="form-select form-select-sm" style="max-width: 80px;">
                                                         <option value="1" selected>1</option>

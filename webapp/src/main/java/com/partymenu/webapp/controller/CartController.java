@@ -1,10 +1,10 @@
 package com.partymenu.webapp.controller;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,51 +22,91 @@ import com.partymenu.webapp.service.CartService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.partymenu.webapp.entity.User;
+import com.partymenu.webapp.service.UserService;
+
 @Controller
 @RequestMapping("/cart")
 public class CartController {
 
     private final CartService cartService;
+    private final UserService userService;
 
-    @Autowired
-    public CartController(CartService cartService) {
+    public CartController(CartService cartService, UserService userService) {
         this.cartService = cartService;
+        this.userService = userService;
     }
 
-    private String getSessionId(HttpSession session) {
+    private Object getCurrentUserOrSessionId(HttpSession session) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated() && !authentication.getPrincipal().equals("anonymousUser")) {
+            String email = authentication.getName();
+            User user = userService.findByEmail(email).orElse(null);
+            if (user != null) {
+                return user.getId();
+            }
+        }
         return session.getId();
     }
 
     @GetMapping
     public String viewCart(HttpSession session, Model model) {
-        String sessionId = getSessionId(session);
-        List<CartItem> cartItems = cartService.getCartItems(sessionId);
+        Object userOrSession = getCurrentUserOrSessionId(session);
+        List<CartItem> cartItems;
+        Integer totalItems;
+        BigDecimal totalAmount;
+        String formattedTotalAmount;
+        boolean isEmpty;
+
+        if (userOrSession instanceof Long userId) {
+            cartItems = cartService.getCartItemsByUserId(userId);
+            totalItems = cartService.getTotalItems(userId);
+            totalAmount = cartService.getTotalAmount(userId);
+            formattedTotalAmount = cartService.getFormattedTotalAmount(userId);
+            isEmpty = cartService.isCartEmpty(userId);
+        } else {
+            String sessionId = (String) userOrSession;
+            cartItems = cartService.getCartItems(sessionId);
+            totalItems = cartService.getTotalItems(sessionId);
+            totalAmount = cartService.getTotalAmount(sessionId);
+            formattedTotalAmount = cartService.getFormattedTotalAmount(sessionId);
+            isEmpty = cartService.isCartEmpty(sessionId);
+        }
 
         model.addAttribute("cartItems", cartItems);
-        model.addAttribute("totalItems", cartService.getTotalItems(sessionId));
-        model.addAttribute("totalAmount", cartService.getTotalAmount(sessionId));
-        model.addAttribute("formattedTotalAmount", cartService.getFormattedTotalAmount(sessionId));
-        model.addAttribute("isEmpty", cartService.isCartEmpty(sessionId));
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("totalAmount", totalAmount);
+        model.addAttribute("formattedTotalAmount", formattedTotalAmount);
+        model.addAttribute("isEmpty", isEmpty);
         model.addAttribute("pageTitle", "Shopping Cart");
 
         return "cart/cart";
     }
 
     @PostMapping("/add")
-    public String addToCart(@RequestParam Long menuItemId, 
+    public String addToCart(@RequestParam Long menuItemId,
                            @RequestParam(defaultValue = "1") Integer quantity,
-                           HttpSession session, 
+                           HttpSession session,
                            HttpServletRequest request,
                            RedirectAttributes redirectAttributes) {
         try {
-            String sessionId = getSessionId(session);
-            CartItem cartItem = cartService.addToCart(sessionId, menuItemId, quantity);
+            Object userOrSession = getCurrentUserOrSessionId(session);
+            CartItem cartItem;
 
-            redirectAttributes.addFlashAttribute("successMessage", 
+            if (userOrSession instanceof Long aLong) {
+                cartItem = cartService.addToCart(aLong, menuItemId, quantity);
+            } else {
+                cartItem = cartService.addToCart((String) userOrSession, menuItemId, quantity);
+            }
+
+            redirectAttributes.addFlashAttribute("successMessage",
                 "'" + cartItem.getMenuItem().getName() + "' added to cart successfully!");
 
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", 
+            redirectAttributes.addFlashAttribute("errorMessage",
                 "Error adding item to cart: " + e.getMessage());
         }
 
@@ -83,13 +123,24 @@ public class CartController {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            String sessionId = getSessionId(session);
-            CartItem cartItem = cartService.addToCart(sessionId, menuItemId, quantity);
+            Object userOrSession = getCurrentUserOrSessionId(session);
+            CartItem cartItem;
+
+            if (userOrSession instanceof Long aLong) {
+                cartItem = cartService.addToCart(aLong, menuItemId, quantity);
+            } else {
+                cartItem = cartService.addToCart((String) userOrSession, menuItemId, quantity);
+            }
 
             response.put("success", true);
             response.put("message", "'" + cartItem.getMenuItem().getName() + "' added to cart!");
-            response.put("totalItems", cartService.getTotalItems(sessionId));
-            response.put("totalAmount", cartService.getFormattedTotalAmount(sessionId));
+            if (userOrSession instanceof Long aLong) {
+                response.put("totalItems", cartService.getTotalItems(aLong));
+                response.put("totalAmount", cartService.getFormattedTotalAmount(aLong));
+            } else {
+                response.put("totalItems", cartService.getTotalItems((String) userOrSession));
+                response.put("totalAmount", cartService.getFormattedTotalAmount((String) userOrSession));
+            }
 
         } catch (Exception e) {
             response.put("success", false);
@@ -100,24 +151,30 @@ public class CartController {
     }
 
     @PostMapping("/update/{cartItemId}")
-    public String updateCartItem(@PathVariable Long cartItemId, 
+    public String updateCartItem(@PathVariable Long cartItemId,
                                 @RequestParam Integer quantity,
-                                HttpSession session, 
+                                HttpSession session,
                                 RedirectAttributes redirectAttributes) {
         try {
-            String sessionId = getSessionId(session);
-            CartItem updatedItem = cartService.updateCartItemQuantity(sessionId, cartItemId, quantity);
+            Object userOrSession = getCurrentUserOrSessionId(session);
+            CartItem updatedItem;
+
+            if (userOrSession instanceof Long aLong) {
+                updatedItem = cartService.updateCartItemQuantity(aLong, cartItemId, quantity);
+            } else {
+                updatedItem = cartService.updateCartItemQuantity((String) userOrSession, cartItemId, quantity);
+            }
 
             if (updatedItem != null) {
-                redirectAttributes.addFlashAttribute("successMessage", 
+                redirectAttributes.addFlashAttribute("successMessage",
                     "Cart item quantity updated successfully!");
             } else {
-                redirectAttributes.addFlashAttribute("successMessage", 
+                redirectAttributes.addFlashAttribute("successMessage",
                     "Item removed from cart!");
             }
 
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", 
+            redirectAttributes.addFlashAttribute("errorMessage",
                 "Error updating cart item: " + e.getMessage());
         }
 
@@ -132,8 +189,14 @@ public class CartController {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            String sessionId = getSessionId(session);
-            CartItem updatedItem = cartService.updateCartItemQuantity(sessionId, cartItemId, quantity);
+            Object userOrSession = getCurrentUserOrSessionId(session);
+            CartItem updatedItem;
+
+            if (userOrSession instanceof Long aLong) {
+                updatedItem = cartService.updateCartItemQuantity(aLong, cartItemId, quantity);
+            } else {
+                updatedItem = cartService.updateCartItemQuantity((String) userOrSession, cartItemId, quantity);
+            }
 
             response.put("success", true);
             if (updatedItem != null) {
@@ -142,8 +205,13 @@ public class CartController {
             } else {
                 response.put("message", "Item removed from cart!");
             }
-            response.put("totalItems", cartService.getTotalItems(sessionId));
-            response.put("totalAmount", cartService.getFormattedTotalAmount(sessionId));
+            if (userOrSession instanceof Long aLong) {
+                response.put("totalItems", cartService.getTotalItems(aLong));
+                response.put("totalAmount", cartService.getFormattedTotalAmount(aLong));
+            } else {
+                response.put("totalItems", cartService.getTotalItems((String) userOrSession));
+                response.put("totalAmount", cartService.getFormattedTotalAmount((String) userOrSession));
+            }
 
         } catch (Exception e) {
             response.put("success", false);
@@ -154,17 +222,22 @@ public class CartController {
     }
 
     @PostMapping("/remove/{cartItemId}")
-    public String removeFromCart(@PathVariable Long cartItemId, 
-                                HttpSession session, 
+    public String removeFromCart(@PathVariable Long cartItemId,
+                                HttpSession session,
                                 RedirectAttributes redirectAttributes) {
         try {
-            String sessionId = getSessionId(session);
-            cartService.removeFromCart(sessionId, cartItemId);
-            redirectAttributes.addFlashAttribute("successMessage", 
+            Object userOrSession = getCurrentUserOrSessionId(session);
+
+            if (userOrSession instanceof Long aLong) {
+                cartService.removeFromCart(aLong, cartItemId);
+            } else {
+                cartService.removeFromCart((String) userOrSession, cartItemId);
+            }
+            redirectAttributes.addFlashAttribute("successMessage",
                 "Item removed from cart successfully!");
 
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", 
+            redirectAttributes.addFlashAttribute("errorMessage",
                 "Error removing item from cart: " + e.getMessage());
         }
 
@@ -174,13 +247,18 @@ public class CartController {
     @PostMapping("/clear")
     public String clearCart(HttpSession session, RedirectAttributes redirectAttributes) {
         try {
-            String sessionId = getSessionId(session);
-            cartService.clearCart(sessionId);
-            redirectAttributes.addFlashAttribute("successMessage", 
+            Object userOrSession = getCurrentUserOrSessionId(session);
+
+            if (userOrSession instanceof Long aLong) {
+                cartService.clearCart(aLong);
+            } else {
+                cartService.clearCart((String) userOrSession);
+            }
+            redirectAttributes.addFlashAttribute("successMessage",
                 "Cart cleared successfully!");
 
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", 
+            redirectAttributes.addFlashAttribute("errorMessage",
                 "Error clearing cart: " + e.getMessage());
         }
 
@@ -190,7 +268,14 @@ public class CartController {
     @GetMapping("/count")
     @ResponseBody
     public ResponseEntity<Integer> getCartItemCount(HttpSession session) {
-        String sessionId = getSessionId(session);
-        return ResponseEntity.ok(cartService.getTotalItems(sessionId));
+        Object userOrSession = getCurrentUserOrSessionId(session);
+        Integer totalItems;
+
+        if (userOrSession instanceof Long aLong) {
+            totalItems = cartService.getTotalItems(aLong);
+        } else {
+            totalItems = cartService.getTotalItems((String) userOrSession);
+        }
+        return ResponseEntity.ok(totalItems);
     }
 }

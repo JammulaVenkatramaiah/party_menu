@@ -27,6 +27,9 @@ public class CartItem {
     @Column(name = "session_id", nullable = false, length = 255)
     private String sessionId;
 
+    @Column(name = "user_id")
+    private Long userId;
+
     @NotNull(message = "Menu item is required")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_item_id", nullable = false)
@@ -64,6 +67,16 @@ public class CartItem {
         this.totalPrice = unitPrice.multiply(new BigDecimal(quantity));
     }
 
+    public CartItem(Long userId, MenuItem menuItem, Integer quantity) {
+        this();
+        this.userId = userId;
+        this.sessionId = ""; // Empty for user-based carts
+        this.menuItem = menuItem;
+        this.quantity = quantity;
+        this.unitPrice = menuItem.getPrice();
+        this.totalPrice = unitPrice.multiply(new BigDecimal(quantity));
+    }
+
     @PreUpdate
     public void preUpdate() {
         this.updatedAt = LocalDateTime.now();
@@ -85,6 +98,14 @@ public class CartItem {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public MenuItem getMenuItem() {
