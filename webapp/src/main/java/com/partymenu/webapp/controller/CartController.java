@@ -96,8 +96,8 @@ public class CartController {
             Object userOrSession = getCurrentUserOrSessionId(session);
             CartItem cartItem;
 
-            if (userOrSession instanceof Long aLong) {
-                cartItem = cartService.addToCart(aLong, menuItemId, quantity);
+            if (userOrSession instanceof Long long1) {
+                cartItem = cartService.addToCart(long1, menuItemId, quantity);
             } else {
                 cartItem = cartService.addToCart((String) userOrSession, menuItemId, quantity);
             }
@@ -126,17 +126,17 @@ public class CartController {
             Object userOrSession = getCurrentUserOrSessionId(session);
             CartItem cartItem;
 
-            if (userOrSession instanceof Long aLong) {
-                cartItem = cartService.addToCart(aLong, menuItemId, quantity);
+            if (userOrSession instanceof Long long1) {
+                cartItem = cartService.addToCart(long1, menuItemId, quantity);
             } else {
                 cartItem = cartService.addToCart((String) userOrSession, menuItemId, quantity);
             }
 
             response.put("success", true);
             response.put("message", "'" + cartItem.getMenuItem().getName() + "' added to cart!");
-            if (userOrSession instanceof Long aLong) {
-                response.put("totalItems", cartService.getTotalItems(aLong));
-                response.put("totalAmount", cartService.getFormattedTotalAmount(aLong));
+            if (userOrSession instanceof Long long1) {
+                response.put("totalItems", cartService.getTotalItems(long1));
+                response.put("totalAmount", cartService.getFormattedTotalAmount(long1));
             } else {
                 response.put("totalItems", cartService.getTotalItems((String) userOrSession));
                 response.put("totalAmount", cartService.getFormattedTotalAmount((String) userOrSession));
@@ -159,8 +159,8 @@ public class CartController {
             Object userOrSession = getCurrentUserOrSessionId(session);
             CartItem updatedItem;
 
-            if (userOrSession instanceof Long aLong) {
-                updatedItem = cartService.updateCartItemQuantity(aLong, cartItemId, quantity);
+            if (userOrSession instanceof Long long1) {
+                updatedItem = cartService.updateCartItemQuantity(long1, cartItemId, quantity);
             } else {
                 updatedItem = cartService.updateCartItemQuantity((String) userOrSession, cartItemId, quantity);
             }
@@ -192,8 +192,8 @@ public class CartController {
             Object userOrSession = getCurrentUserOrSessionId(session);
             CartItem updatedItem;
 
-            if (userOrSession instanceof Long aLong) {
-                updatedItem = cartService.updateCartItemQuantity(aLong, cartItemId, quantity);
+            if (userOrSession instanceof Long long1) {
+                updatedItem = cartService.updateCartItemQuantity(long1, cartItemId, quantity);
             } else {
                 updatedItem = cartService.updateCartItemQuantity((String) userOrSession, cartItemId, quantity);
             }
@@ -205,9 +205,9 @@ public class CartController {
             } else {
                 response.put("message", "Item removed from cart!");
             }
-            if (userOrSession instanceof Long aLong) {
-                response.put("totalItems", cartService.getTotalItems(aLong));
-                response.put("totalAmount", cartService.getFormattedTotalAmount(aLong));
+            if (userOrSession instanceof Long long1) {
+                response.put("totalItems", cartService.getTotalItems(long1));
+                response.put("totalAmount", cartService.getFormattedTotalAmount(long1));
             } else {
                 response.put("totalItems", cartService.getTotalItems((String) userOrSession));
                 response.put("totalAmount", cartService.getFormattedTotalAmount((String) userOrSession));
@@ -228,8 +228,8 @@ public class CartController {
         try {
             Object userOrSession = getCurrentUserOrSessionId(session);
 
-            if (userOrSession instanceof Long aLong) {
-                cartService.removeFromCart(aLong, cartItemId);
+            if (userOrSession instanceof Long long1) {
+                cartService.removeFromCart(long1, cartItemId);
             } else {
                 cartService.removeFromCart((String) userOrSession, cartItemId);
             }
@@ -249,8 +249,8 @@ public class CartController {
         try {
             Object userOrSession = getCurrentUserOrSessionId(session);
 
-            if (userOrSession instanceof Long aLong) {
-                cartService.clearCart(aLong);
+            if (userOrSession instanceof Long long1) {
+                cartService.clearCart(long1);
             } else {
                 cartService.clearCart((String) userOrSession);
             }
@@ -271,8 +271,8 @@ public class CartController {
         Object userOrSession = getCurrentUserOrSessionId(session);
         Integer totalItems;
 
-        if (userOrSession instanceof Long aLong) {
-            totalItems = cartService.getTotalItems(aLong);
+        if (userOrSession instanceof Long long1) {
+            totalItems = cartService.getTotalItems(long1);
         } else {
             totalItems = cartService.getTotalItems((String) userOrSession);
         }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/base}">
 <head>
@@ -7,144 +7,144 @@
 </head>
 
 <div layout:fragment="content">
-    <!-- Hero Section -->
-    <div class="hero-section text-center py-5 mb-5">
-        <div class="container">
-            <h1 class="display-4 text-white fw-bold mb-4">
-                <i class="fas fa-star me-3"></i>
-                Welcome to Party Menu
-                <i class="fas fa-star ms-3"></i>
-            </h1>
-            <p class="lead text-white-50 mb-4">
-                Discover amazing party menus for every occasion
-            </p>
-            <a th:href="@{/menu}" class="btn btn-light btn-lg px-5">
-                <i class="fas fa-utensils me-2"></i>Explore Menus
-            </a>
-        </div>
-    </div>
-    
-    <!-- Quick Stats -->
-    <div class="container mb-5">
-        <div class="row text-center">
-            <div class="col-md-4">
-                <div class="card stats-card">
-                    <div class="card-body">
-                        <i class="fas fa-list-alt fa-3x text-primary mb-3"></i>
-                        <h3 th:text="${menuTypeCount}">0</h3>
-                        <p class="text-muted">Menu Types</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card stats-card">
-                    <div class="card-body">
-                        <i class="fas fa-utensils fa-3x text-success mb-3"></i>
-                        <h3 th:text="${popularItems.size()}">0</h3>
-                        <p class="text-muted">Popular Items</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card stats-card">
-                    <div class="card-body">
-                        <i class="fas fa-star fa-3x text-warning mb-3"></i>
-                        <h3>Premium</h3>
-                        <p class="text-muted">Quality</p>
-                    </div>
-                </div>
+        <!-- Hero Section -->
+        <div class="hero-section text-center py-5 mb-5">
+            <div class="container">
+                <h1 class="display-4 text-white fw-bold mb-4">
+                    <i class="fas fa-star me-3"></i>
+                    Welcome to Party Menu
+                    <i class="fas fa-star ms-3"></i>
+                </h1>
+                <p class="lead text-white-50 mb-4">
+                    Discover amazing party menus for every occasion
+                </p>
+                <a th:href="@{/menu}" class="btn btn-light btn-lg px-5">
+                    <i class="fas fa-utensils me-2"></i>Explore Menus
+                </a>
             </div>
         </div>
-    </div>
-    
-    <!-- Popular Items -->
-    <div class="container mb-5">
-        <h2 class="text-center mb-4">
-            <i class="fas fa-fire text-danger me-2"></i>Popular Items
-        </h2>
-        <div class="row" th:if="${popularItems != null and !popularItems.empty}">
-            <div class="col-md-4 mb-4" th:each="item : ${popularItems}">
-                <div class="card menu-item-card h-100">
-                    <div class="card-img-top-wrapper">
-                        <img th:src="${item.imageUrl} ?: '/images/placeholder/food-placeholder.jpg'" 
-                             class="card-img-top" th:alt="${item.name}">
-                        <div class="popular-badge">
-                            <i class="fas fa-fire text-danger"></i>
+
+        <!-- Quick Stats -->
+        <div class="container mb-5">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="card stats-card">
+                        <div class="card-body">
+                            <i class="fas fa-list-alt fa-3x text-primary mb-3"></i>
+                            <h3 th:text="${menuTypeCount}">0</h3>
+                            <p class="text-muted">Menu Types</p>
                         </div>
                     </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title" th:text="${item.name}">Menu Item Name</h5>
-                        <p class="card-text flex-grow-1" th:text="${item.description}">Description</p>
-                        <div class="mt-auto">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="h5 text-success mb-0" th:text="${item.formattedPrice}">$0.00</span>
-                                <small class="text-muted">
-                                    <i class="fas fa-clock me-1"></i>
-                                    <span th:text="${item.preparationTimeText}">30 mins</span>
-                                </small>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stats-card">
+                        <div class="card-body">
+                            <i class="fas fa-utensils fa-3x text-success mb-3"></i>
+                            <h3 th:text="${popularItems.size()}">0</h3>
+                            <p class="text-muted">Popular Items</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stats-card">
+                        <div class="card-body">
+                            <i class="fas fa-star fa-3x text-warning mb-3"></i>
+                            <h3>Premium</h3>
+                            <p class="text-muted">Quality</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popular Items -->
+        <div class="container mb-5">
+            <h2 class="text-center mb-4">
+                <i class="fas fa-fire text-danger me-2"></i>Popular Items
+            </h2>
+            <div class="row" th:if="${popularItems != null and !popularItems.empty}">
+                <div class="col-md-4 mb-4" th:each="item : ${popularItems}">
+                    <div class="card menu-item-card h-100">
+                        <div class="card-img-top-wrapper">
+                            <img th:src="${item.imageUrl} ?: '/images/placeholder/food-placeholder.jpg'"
+                                 class="card-img-top" th:alt="${item.name}">
+                            <div class="popular-badge">
+                                <i class="fas fa-fire text-danger"></i>
                             </div>
-                            <a th:href="@{/menu/item/{id}(id=${item.id})}" class="btn btn-primary btn-sm mt-2 w-100">
-                                <i class="fas fa-eye me-1"></i>View Details
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title" th:text="${item.name}">Menu Item Name</h5>
+                            <p class="card-text flex-grow-1" th:text="${item.description}">Description</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="h5 text-success mb-0" th:text="${item.formattedPrice}">$0.00</span>
+                                    <small class="text-muted">
+                                        <i class="fas fa-clock me-1"></i>
+                                        <span th:text="${item.preparationTimeText}">30 mins</span>
+                                    </small>
+                                </div>
+                                <a th:href="@{/menu/item/{id}(id=${item.id})}" class="btn btn-primary btn-sm mt-2 w-100">
+                                    <i class="fas fa-eye me-1"></i>View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" th:if="${popularItems == null or popularItems.empty}">
+                <p class="text-muted">No popular items available at the moment.</p>
+            </div>
+        </div>
+
+        <!-- Menu Types -->
+        <div class="container mb-5">
+            <h2 class="text-center mb-4">
+                <i class="fas fa-list me-2"></i>Our Menu Types
+            </h2>
+            <div class="row" th:if="${menuTypes != null and not menuTypes.empty}">
+                <div class="col-md-6 col-lg-3 mb-4" th:each="menuType : ${menuTypes}">
+                    <div class="card menu-type-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-utensils fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title" th:text="${menuType.name}">Menu Type</h5>
+                            <p class="card-text" th:text="${menuType.description}">Description</p>
+                            <a th:href="@{/menu/{id}(id=${menuType.id})}" class="btn btn-outline-primary">
+                                <i class="fas fa-arrow-right me-1"></i>Explore
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="text-center" th:if="${popularItems == null or popularItems.empty}">
-            <p class="text-muted">No popular items available at the moment.</p>
-        </div>
-    </div>
-    
-    <!-- Menu Types -->
-    <div class="container mb-5">
-        <h2 class="text-center mb-4">
-            <i class="fas fa-list me-2"></i>Our Menu Types
-        </h2>
-        <div class="row" th:if="${menuTypes != null and not menuTypes.empty}">
-            <div class="col-md-6 col-lg-3 mb-4" th:each="menuType : ${menuTypes}">
-                <div class="card menu-type-card h-100">
-                    <div class="card-body text-center">
-                        <i class="fas fa-utensils fa-3x text-primary mb-3"></i>
-                        <h5 class="card-title" th:text="${menuType.name}">Menu Type</h5>
-                        <p class="card-text" th:text="${menuType.description}">Description</p>
-                        <a th:href="@{/menu/{id}(id=${menuType.id})}" class="btn btn-outline-primary">
-                            <i class="fas fa-arrow-right me-1"></i>Explore
-                        </a>
-                    </div>
-                </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section text-center py-5">
+            <div class="container">
+                <h2 class="text-white mb-4">Ready to Plan Your Party?</h2>
+                <p class="text-white-50 mb-4">Browse our extensive menu collection and find the perfect dishes for your event</p>
+                <a th:href="@{/menu}" class="btn btn-light btn-lg me-3">
+                    <i class="fas fa-utensils me-2"></i>Browse Menus
+                </a>
+                <a th:href="@{/about}" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-info-circle me-2"></i>Learn More
+                </a>
             </div>
         </div>
-    </div>
-    
-    <!-- Call to Action -->
-    <div class="cta-section text-center py-5">
-        <div class="container">
-            <h2 class="text-white mb-4">Ready to Plan Your Party?</h2>
-            <p class="text-white-50 mb-4">Browse our extensive menu collection and find the perfect dishes for your event</p>
-            <a th:href="@{/menu}" class="btn btn-light btn-lg me-3">
-                <i class="fas fa-utensils me-2"></i>Browse Menus
-            </a>
-            <a th:href="@{/about}" class="btn btn-outline-light btn-lg">
-                <i class="fas fa-info-circle me-2"></i>Learn More
-            </a>
-        </div>
-    </div>
 
 
 
-    <script>
-        function showRegisterForm() {
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'block';
-            document.getElementById('authModalLabel').textContent = 'Register';
-        }
+        <script>
+            function showRegisterForm() {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('registerForm').style.display = 'block';
+                document.getElementById('authModalLabel').textContent = 'Register';
+            }
 
-        function showLoginForm() {
-            document.getElementById('registerForm').style.display = 'none';
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('authModalLabel').textContent = 'Login';
-        }
-    </script>
+            function showLoginForm() {
+                document.getElementById('registerForm').style.display = 'none';
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('authModalLabel').textContent = 'Login';
+            }
+        </script>
 </div>
 </html>

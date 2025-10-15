@@ -168,10 +168,10 @@ public class CartItem {
 
     // Utility methods
     public String getFormattedUnitPrice() {
-        return String.format("$%.2f", unitPrice);
+        return "$%.2f".formatted(unitPrice);
     }
 
     public String getFormattedTotalPrice() {
-        return String.format("$%.2f", totalPrice);
+        return "$%.2f".formatted(totalPrice);
     }
 }
